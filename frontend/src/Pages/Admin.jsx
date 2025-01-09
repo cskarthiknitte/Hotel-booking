@@ -15,7 +15,7 @@ const Admin = () => {
   const fetchBookings = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/admin/bookings"
+        `${process.env.BACKEND_URL}/bookings`
       );
       setbookings(response.data);
     } catch (error) {
@@ -25,7 +25,7 @@ const Admin = () => {
 
   const fetchHotels = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/hotels");
+      const response = await axios.get(`${process.env.BACKEND_URL}/hotels`);
       setHotels(response.data);
     } catch (error) {
       console.error("Error fetching hotels:", error);
@@ -39,7 +39,7 @@ const Admin = () => {
     formData.append("hotelImage", hotelImage);
 
     try {
-      await axios.post("http://localhost:5000/api/hotels", formData, {
+      await axios.post(`${process.env.BACKEND_URL}/hotels`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -54,7 +54,7 @@ const Admin = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/hotels/${id}`);
+      await axios.delete(`${process.env.BACKEND_URL}/hotels/${id}`);
       fetchHotels();
     } catch (error) {
       console.error("Error deleting hotels:", error.response ? error.response.data : error.message);
@@ -125,7 +125,7 @@ const Admin = () => {
         {Hotels.map((hotel, index) => (
           <li key={index} className="flex items-center space-x-4 bg-white p-4 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
             <img
-              src={`http://localhost:5000/uploads/${hotel.hotelImage}`}
+              src={`${process.env.IMAGE_URL}/${hotel.hotelImage}`}
               alt={hotel.hotelImage}
               className="w-32 h-32 object-cover rounded-md"
             />

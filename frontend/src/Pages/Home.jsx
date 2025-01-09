@@ -11,7 +11,7 @@ const Home = () => {
 
   const fetchHotels = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/hotels');
+      const response = await axios.get(`${process.env.BACKEND_URL}/hotels`);
       setHotels(response.data);
     } catch (error) {
       console.error('Error fetching hotels:', error);
@@ -52,7 +52,7 @@ const Home = () => {
           {Hotels.map((hotel, index) => (
             <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
               <img
-                src={`http://localhost:5000/uploads/${hotel.hotelImage}`}
+                src={`${process.env.IMAGE_URL}/${hotel.hotelImage}`}
                 alt={hotel.hotelName}
                 className="w-full h-48 object-cover"
               />

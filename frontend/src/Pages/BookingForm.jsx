@@ -9,7 +9,7 @@ const BookingForm = () => {
   const [customerName, setCustomerName] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/hotels')
+    axios.get(`${process.env.BACKEND_URL}/hotels`)
       .then(response => setHotels(response.data))
       .catch(error => console.error('Error fetching hotels:', error));
   }, []);
@@ -18,7 +18,7 @@ const BookingForm = () => {
     e.preventDefault();
     const bookingData = { hotelName, from, to, customerName };
 
-    axios.post('http://localhost:5000/api/bookings', bookingData)
+    axios.post(`${process.env.BACKEND_URL}/bookings`, bookingData)
       .then(response => {
         alert('Booking successful!');
         setHotelName('');
